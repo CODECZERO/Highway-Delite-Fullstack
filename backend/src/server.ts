@@ -15,13 +15,9 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(helmet());
+// Allow all origins (for development only)
 app.use(cors({
-  origin: [
-    'https://highwaydelitefullstack.vercel.app/',
-    'https://highwaydelitefullstack.vercel.app',
-    'http://localhost:5173'
-  ],
-  credentials: true,
+  origin: '*',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
