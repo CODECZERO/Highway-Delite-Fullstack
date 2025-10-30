@@ -15,13 +15,15 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(helmet());
+app.use(morgan('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// Allow ALL CORS - Most permissive settings
+// CORS Configuration
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', '*');
-  res.header('Access-Control-Allow-Headers', '*');
-  res.header('Access-Control-Allow-Credentials', 'true');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
   
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
@@ -29,22 +31,21 @@ app.use((req, res, next) => {
   
   next();
 });
-app.use(morgan('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
-// Routes
-app.get('/', (req: Request, res: Response) => {
-  res.json({
-    success: true,
-    message: 'BookIt API is running',
+// API Routes
+app.use('/api/experiences', experienceRoutes);
+app.use('/api/bookings', bookingRoutes);
+app.use('/api/promos', promoRoutes);
+
+// Health Check Endpoint
+app.get('/health', (req: Request, res: Response) => {
+  res.status(200).json({
+    status: 'UP',
+    timestamp: new Date().toISOString(),
+    service: 'BookIt API',
     version: '1.0.0'
   });
 });
-
-app.use('/api/experiences', experienceRoutes);
-app.use('/api/bookings', bookingRoutes);
-app.use('/api/promo', promoRoutes);
 
 // 404 handler for undefined routes
 app.use((req: Request, res: Response) => {
