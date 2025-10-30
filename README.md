@@ -202,32 +202,7 @@ The frontend will run on `http://localhost:5173`
 4. Get your connection string
 5. Update `MONGODB_URI` in your environment variables
 
-## 📸 Screenshots
 
-### Home Page
-Browse through curated travel experiences with ratings and pricing.
-
-### Details Page
-View detailed information about experiences including highlights, inclusions, and available slots.
-
-### Checkout Page
-Enter customer information and apply promo codes for discounts.
-
-### Result Page
-Booking confirmation with all details and booking ID.
-
-## 🧪 Testing
-
-### Test the Application
-
-1. Start both backend and frontend servers
-2. Navigate to `http://localhost:5173`
-3. Browse experiences
-4. Select an experience and choose a slot
-5. Fill in customer information
-6. Apply a promo code (e.g., SAVE10)
-7. Complete the booking
-8. View confirmation page
 
 ## 📝 Environment Variables
 
